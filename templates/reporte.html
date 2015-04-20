@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-sm-6"><h4>Reporte de ventas</h4>(Ejemplo: Total de ventas 3, Rango SUPERVISOR )</div>
+                <div class="col-sm-6" style="text-align:right">
+                </div>
+            </div>
+        </div>
+        <div class="panel-body" >
+            <div class="row">
+                
+                    <div class="col-sm-12">
+                        <form action="{{ path('reporte')}}" method="get">
+                        <div class="form-group">
+                            <label>Total ventas:</label> <input type="text" name="total_ventas" value="{{ total_ventas}}" class="form-control" required=true>
+                        </div>
+                        <div class="form-group">
+                            <label>Rango:</label>
+                            <select name="rango" class="form-control" >
+                                <option value="SUPERVISOR" {% if rango |upper == 'SUPERVISOR' %}selected="selected"{% endif %}>SUPERVISOR</option>
+                                <option value="SEMI-JUNIOR" {% if rango |upper == 'SEMI-JUNIOR' %}selected="selected"{% endif %}>SEMI-JUNIOR</option>
+                                <option value="JUNIOR" {% if rango |upper == 'JUNIOR' %}selected="selected"{% endif %}>JUNIOR</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary" >Consultar</button>
+                </form>
+                    </div>
+                    
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Vendedor</th>
+                                <th>Fecha</th>
+                                <th>Monto</th>
+                            </tr>
+                        </thead>
+                        {% for venta in list %}
+                        <tbody>
+                        <tr>
+                            <td>{{ venta.apellido }}, {{ venta.nombre }}</td>
+                            <td>{{ venta.venta_fecha }}</td>
+                            <td>{{ venta.venta_monto }}</td>
+
+                        </tr>
+                        </tbody>
+                    {% endfor%}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title '' %} - Evaluación</title>
+        <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link href="{{ asset('css/main.css') }}" rel="stylesheet" type="text/css" />
+        <script src="//code.jquery.com/jquery-1.10.1.min.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>   
+        <script src="js/index.js"></script>  
+    </head>
+    <body>     
+        
+        <div id="wrapper">
+            <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="{{ app.request.baseUrl }}/admin/dashboard">
+                        Sistema de ventas
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ app.request.baseUrl }}/admin/dashboard">Dashboard</a>
+                </li>
+                <li>
+                    <a href="{{ app.request.baseUrl }}/admin/usuario/lista">Usuarios</a>
+                </li>
+                <li >
+                    <a href="#">Ventas</a>
+                    <ul><a href="{{ app.request.baseUrl }}/admin/venta/alta">Alta</a></ul>
+                    <ul><a href="{{ app.request.baseUrl }}/admin/venta/reporte">Reporte</a></ul>
+                </li>
+                <li>
+                    <a href="{{ app.request.baseUrl }}/admin/logout">Salir</a>
+                </li>
+            </ul>
+            
+        </div>
+
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
+        </div>
+            
+    </body>
+</html>

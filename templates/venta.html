@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-sm-12"><h4>Alta de ventas</h4></div>
+            </div>
+        </div>
+        
+        <div class="panel-body" >
+            <div class="row">
+
+                <div class="col-sm-7">
+                    <form accept="{{ app.request.baseUrl}}/admin/venta/alta" method="post">
+                        <div>{{error}}</div>
+                        <div class="form-group">
+                            <label>ID vendedor</label>
+                            <input type="text" name="id_usuario" value="" class="form-control" required="true"></div>
+                        <div class="form-group">
+                            <label>Fecha</label>
+                            <input type="date" name="venta_fecha" value="" class="form-control" required="true">
+                        </div>
+                        <div class="form-group">
+                            <label>Monto</label>
+                            <input type="text" name="venta_monto" value=""  class="form-control" required="true">
+                        </div>
+                        
+              
+                        <button type="submit" class="btn btn-success">Guardar</button>
+                        <a href="{{ app.request.baseUrl}}/admin/dashboard" class="btn btn-danger">Cancelar</a>
+                        
+                    </form>    
+                    </div>
+                    <div class="col-sm-5">
+         
+                    </div>
+                
+            </div>
+        </div>
+    </div>
+{% endblock %}

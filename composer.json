@@ -1,0 +1,13 @@
+{
+    "require": {
+        "silex/silex": "~1.2",
+        "twig/twig": ">=1.8,<2.0-dev",
+        "doctrine/dbal": "2.2.*",
+        "symfony/security": "2.6.*",
+        "symfony/serializer": "2.6.*",
+        "symfony/twig-bridge": "2.6.*"
+    },
+    "autoload": {
+        "psr-0": { "Security\\": "src/" }
+    }
+}

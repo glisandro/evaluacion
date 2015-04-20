@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    
+    <div class="col-md-4">
+        <h2>Ultimos usuarios registrados</h2>
+        <ul>
+            {% for usuario in usuarios %}
+            <li><a href="{{ app.request.baseUrl }}/admin/usuario/{{ usuario.id_usuario }}/editar">{{ usuario.apellido}}, {{ usuario.nombre}}</a></li>
+            {% endfor %}
+        </ul><a class="btn btn-default" href="{{ app.request.baseUrl }}/admin/usuario/lista" role="button">Administrar »</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Ventas de hoy</h2>
+        <ul>
+            {% for venta in ventas %}
+            <li>{{ venta.venta_id}} ${{ venta.venta_monto}}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="col-md-4">
+
+    </div>
+            
+{% endblock %}

@@ -1,0 +1,96 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-sm-12"><h4>{{ accion |capitalize }} usuario #{{ usuario.id_usuario }}</h4></div>
+            </div>
+        </div>
+        
+        <div class="panel-body" >
+            <div class="row">
+                {% if accion == 'editar' %}
+                <div class="col-sm-7">
+                    <ul class="nav nav-pills">
+                      <li class="active"><a href="#">Datos personales</a></li>
+                      <li ><a href="#">Editar Contraseña</a></li>
+                    </ul>
+                </div>
+                {% endif %}
+                <div class="col-sm-7">
+                    <form accept="{{ app.request.baseUrl}}/admin/usuario/{{ usuario.id_usuario }}/{{ accion }}" enctype="multipart/form-data" method="post">
+                        <div>{{error}}</div>
+                        <h3>Datos personales</h3>
+                        
+                        <div class="form-group">
+                            <label>ID</label>
+                            <input type="hidden" name="id_usuario" value="{{ usuario.id_usuario }}" class="form-control">{{ usuario.id_usuario }}</div>
+                        <div class="form-group">
+                            <label>Nombre</label>
+                            <input type="text" name="nombre" value="{{ usuario.nombre }}" class="form-control" required="true">
+                        </div>
+                        <div class="form-group">
+                            <label>Apellido</label>
+                            <input type="text" name="apellido" value="{{ usuario.apellido }}"  class="form-control" required="true">
+                        </div>
+                        <div class="form-group">
+                            <label >
+                                <input required="true" type="radio" name="sexo" id="sexo_f" value="f" {% if usuario.sexo|lower == 'f'%} checked="checked" {% endif %}>
+                                Femenino
+                            </label>
+                            <label>
+                                <input required="true" type="radio" name="sexo" id="sexo_m" value="m" {% if usuario.sexo|lower == 'm'%} checked="checked" {% endif %}>
+                                Masculino
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label>Documento</label>
+                            <input type="text" name="documento" value="{{ usuario.documento }}"  class="form-control" required="true">
+                        </div>
+                        <div class="form-group">
+                            <label>Puesto</label>
+                            <select name="puesto" class="form-control" required="true">
+                                <option value="SUPERVISOR" {% if usuario.puesto |upper == 'SUPERVISOR' %}selected="selected"{% endif %}>SUPERVISOR</option>
+                                <option value="SEMI-JUNIOR"{% if usuario.puesto |upper == 'SEMI-JUNIOR' %}selected="selected"{% endif %}>SEMI-JUNIOR</option>
+                                <option value="JUNIOR" {% if (usuario.puesto |upper == 'JUNIOR') or (usuario.puesto == '')%}selected="selected"{% endif %}>JUNIOR</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Foto</label>
+                            <input type="hidden" name="imagen" value="{{ usuario.imagen }}"  class="form-control" >
+                            <input type="file" name="file" value="" class="form-control" {% if accion == 'nuevo' %}required="true"{% endif %}>
+                        </div>
+                        {% if accion == 'nuevo' %}
+                        <h3>Datos de acceso</h3>
+                        <div class="form-group">
+                            <label>Usuario</label>
+                            <input type="text" name="user" value="{{ usuario.user }}" class="form-control" required="true" >
+                        </div>
+                        <div class="form-group">
+                            <label>Contraseña</label>
+                            <input type="password" name="pass" value="" class="form-control" required="true">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Repetir contraseña</label>
+                            <input type="password" name="pass2" value="" class="form-control" required="true">
+                        </div>
+                        {% endif %}
+              
+                        <button type="submit" class="btn btn-success">{{accion |capitalize}}</button>
+                        <a href="{{ app.request.baseUrl}}/admin/usuario/lista" class="btn btn-danger">Cancelar</a>
+                        
+                    </form>    
+                    </div>
+                    <div class="col-sm-5">
+                        {% if usuario.imagen is not null and usuario.imagen != '' %}
+                        <img src="{{ app.request.baseUrl}}/imagenes/usuarios/{{ usuario.imagen }}" width="250" />
+                        {% endif %}    
+                    </div>
+                
+            </div>
+        </div>
+    </div>
+{% endblock %}

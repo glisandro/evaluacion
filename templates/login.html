@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-4">
+        <form action="{{ path('admin_login_check') }}" method="post">
+            {{ error }}
+            <div class="form-group">
+                <label>Usuario</label>
+                <input type="text" name="_username" value="{{ last_username }}" class="form-control" placeholder="admin" required="true" />
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="_password" value="" class="form-control" placeholder="admin" required="true"/>
+            </div>
+            <input type="submit" value="Login" class="btn btn-primary" />
+        </form>
+    </div>
+    <div class="col-md-4">
+    </div>
+            
+{% endblock %}

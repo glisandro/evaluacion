@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-sm-6"><h4>Usuarios</h4></div>
+                <div class="col-sm-6" style="text-align:right">
+                    <a href="{{ app.request.baseUrl}}/admin/usuario/nuevo" class="btn btn-primary">Nuevo</a>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body" >
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th>Documento</th>
+                        <th>Puesto</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                {% for usuario in list %}
+                <tbody>
+                <tr>
+                    <td>{{ usuario.id_usuario }}</td>
+                    <td><img src="{{ app.request.baseUrl}}/imagenes/usuarios/{{ usuario.imagen }}" width="30" />  {{ usuario.apellido }}, {{ usuario.nombre }} ({{ usuario.sexo }})</td>
+                    <td>{{ usuario.documento }}</td>
+                    <td>{{ usuario.puesto }}</td>
+                    <td>
+                        <a href="{{ app.request.baseUrl}}/admin/usuario/{{ usuario.id_usuario}}/editar"  class="btn btn-primary">Editar</a>
+                        <a href="{{ app.request.baseUrl}}/admin/usuario/{{ usuario.id_usuario}}/eliminar" onclick="return confirm('Está seguro que desea eliminar el usuario {{ usuario.apellido }}, {{ usuario.nombre }}')" class="btn btn-danger">Eliminar</a>
+                    </td>
+
+                </tr>
+                </tbody>
+            {% endfor%}
+            </table>
+        </div>
+    </div>
+{% endblock %}
